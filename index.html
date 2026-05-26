@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online Alan Gael A&G</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f0f2f5; text-align: center; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
+        header { padding: 10px 5px; background: linear-gradient(135deg, #74b9ff, #ffffff, #74b9ff); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .logo-circulo { width: 55px; height: 55px; background: #fff; border: 3px solid #00a8ff; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 15px; color: #00a8ff; }
+        .stars { color: #f1c40f; font-size: 12px; margin: 2px 0; }
+        .nombre-tienda { font-size: 14px; font-weight: 900; color: #0056b3; text-transform: uppercase; margin-bottom: 8px; }
+        .promo-banner { background: #fff9c4; margin: 10px; padding: 12px; border-radius: 12px; border: 2.5px dashed #ff9f43; box-shadow: 0 4px 8px rgba(0,0,0,0.1); animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        .promo-texto { font-weight: 900; color: #ff007f; font-size: 11px; text-transform: uppercase; line-height: 1.3; }
+        .search-bar { width: 88%; padding: 8px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 8px; font-size: 14px; outline: none; }
+        .categorias { display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; }
+        .btn { padding: 5px 12px; border-radius: 12px; border: 1px solid #ddd; background: white; font-size: 11px; font-weight: 700; cursor: pointer; }
+        .btn.active { background: #00a8ff; color: white; border-color: #00a8ff; }
+        main { flex: 1; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px; }
+        .card { background: white; padding: 12px; border-radius: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; min-height: 120px; }
+        .card h3 { font-size: 9px; margin: 0 0 8px 0; height: 30px; overflow: hidden; color: #555; line-height: 1.2; text-transform: uppercase; }
+        .precio { color: #2ecc71; font-weight: 800; font-size: 18px; margin-bottom: 8px; }
+        .btn-ws { background: #00e676; color: white; border: none; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 11px; text-transform: uppercase; display: block; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        footer { background: #333; color: white; padding: 25px 15px; margin-top: 20px; font-size: 12px; line-height: 1.6; }
+        .footer-info { margin-bottom: 15px; color: #bbb; }
+        .btn-email { background: #007bff; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; display: inline-block; font-weight: bold; margin-top: 10px; font-size: 11px; text-transform: uppercase; }
+        .footer-logo { font-weight: bold; color: #fff; font-size: 14px; margin-bottom: 10px; display: block; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo-circulo">A & G</div>
+    <div class="stars">⭐⭐⭐</div>
+    <div class="nombre-tienda">Tienda Online Alan Gael A&G</div>
+    <input type="text" id="buscador" class="search-bar" placeholder="🔍 Buscar producto...">
+    <div class="categorias">
+        <button class="btn active" onclick="filtrar('Todos', this)">Todos</button>
+        <button class="btn" onclick="filtrar('Tecno', this)">Tecno</button>
+        <button class="btn" onclick="filtrar('Audio', this)">Audio</button>
+        <button class="btn" onclick="filtrar('Hogar', this)">Hogar</button>
+    </div>
+</header>
+<main>
+    <div class="promo-banner">
+        <div class="promo-texto">🌟 ¡Juega a la ruleta con tu compra sin cargo y gana importantes premios!! 🌟</div>
+    </div>
+    <div id="productos" class="grid"></div>
+</main>
+<footer>
+    <span class="footer-logo">Alan Gael A&G</span>
+    <div class="footer-info">
+        📍 San Miguel de Tucumán, Tucumán<br>
+        📮 Código Postal: 4000
+    </div>
+    <a href="mailto:poncejose027@gmail.com" class="btn-email">✉️ Enviar Correo Electrónico</a>
+    <p style="font-size: 10px; color: #777; margin-top: 20px;">© 2024 Todos los derechos reservados.</p>
+</footer>
+<script>
+    const miTelefono = "5493815727447"; 
+    const lista = [
+        { n: "ADAPTADOR AUDIO HEMBRA A 2 JACK MACHO", c: "Tecno", p: 1600 },
+        { n: "ADAPTADOR IP A JACK 3.5 – BLANCO", c: "Tecno", p: 3999 },
+        { n: "ADAPTADOR MICROSD A USB", c: "Tecno", p: 750 },
+        { n: "ADAPTADOR SIM", c: "Tecno", p: 499 },
+        { n: "ADAPTADOR HDMI A 2 HDMI", c: "Tecno", p: 3000 },
+        { n: "MODULADOR FM ALS-A09 – NEGRO", c: "Tecno", p: 12000 },
+        { n: "AURICULAR BT MODO-706 CROWS", c: "Audio", p: 9900 },
+        { n: "AURICULAR P15 BT MOD63-22", c: "Audio", p: 16999 },
+        { n: "VINCHA BT P47", c: "Audio", p: 9999 },
+        { n: "AFEITADORA METAL MODS-776", c: "Hogar", p: 7999 },
+        { n: "FREIDORA DE AIRE 1800W 10L", c: "Hogar", p: 85000 },
+        { n: "TV BOX STREAM CORE 4-32GB", c: "Hogar", p: 39000 },
+        { n: "PROYECTOR ORVA-HY300", c: "Hogar", p: 79999 },
+        { n: "PARLANTE 15” MODV-0036", c: "Audio", p: 149999 }
+    ];
+    function mostrar(prod) {
+        const div = document.getElementById('productos');
+        div.innerHTML = prod.map(i => `
+            <div class="card">
+                <h3>${i.n}</h3>
+                <div>
+                    <p class="precio">$${i.p}</p>
+                    <a class="btn-ws" href="https://wa.me{miTelefono}?text=Hola Alan! Quiero: ${encodeURIComponent(i.n)} ($${i.p})" target="_blank">🛒 PEDIR</a>
+                </div>
+            </div>
+        `).join('');
+    }
+    function filtrar(cat, btn) {
+        document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        mostrar(cat === 'Todos' ? lista : lista.filter(i => i.c === cat));
+    }
+    document.getElementById('buscador').oninput = (e) => {
+        const t = e.target.value.toLowerCase();
+        mostrar(lista.filter(i => i.n.toLowerCase().includes(t)));
+    };
+    window.onload = () => mostrar(lista);
+</script>
+</body>
+</html>
